@@ -41,6 +41,15 @@ class DepartmentController:
         except DepartmentNotFoundError:
             return {"detail": "Departamento não encontrado."}, status.HTTP_404_NOT_FOUND
 
+    def delete_department(self, department_id: int):
+        try:
+            department = self.department_use_cases.delete_department(department_id)
+            return {
+                "message": f"Departamento '{department.name}' deletado com sucesso."
+            }, status.HTTP_200_OK
+        except DepartmentNotFoundError:
+            return {"detail": "Departamento não encontrado."}, status.HTTP_404_NOT_FOUND
+
     @staticmethod
     def _invalid_name_response():
         return (

@@ -32,6 +32,11 @@ class DepartmentUseCases:
         self.department_service.update_Department(department_id, clean_name)
         return {"id": department_id, "name": clean_name}
 
+    def delete_department(self, department_id: int):
+        department = self.get_department(department_id)
+        self.department_service.delet_Department(department_id)
+        return department
+
     @staticmethod
     def _validate_name(name: str) -> str:
         if not isinstance(name, str) or not name.strip():

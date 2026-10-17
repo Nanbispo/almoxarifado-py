@@ -27,17 +27,19 @@ def departments(request):
         connection.close()
 
 
-@api_view(["GET", "PUT"])
+@api_view(["GET", "PUT", "DELETE"])
 def department_detail(request, department_id):
     connection = get_connection()
     try:
         controller = _build_department_controller(connection)
         if request.method == "GET":
             body, response_status = controller.get_department(department_id)
-        else:
+        elif request.method == "PUT":
             body, response_status = controller.update_department(
                 department_id, request.data
             )
+        else:
+            body, response_status = controller.delete_department(department_id)
         return Response(body, status=response_status)
     finally:
         connection.close()

@@ -9,6 +9,7 @@ class DepartmentService:
     QUERY_SELECT_BY_ID = "SELECT ID, NAME FROM DEPARTMENT WHERE ID = ?"
     QUERY_INSERT = "INSERT INTO DEPARTMENT (NAME) VALUES (?)"
     QUERY_UPDATE = "UPDATE DEPARTMENT SET NAME = ? WHERE ID = ?"
+    QUERY_DELET = "UPDATE DEPARTMENT SET D_E_L_E_T_ = '*' WHERE ID = ?"
 
     def __init__(self, connection):
         """
@@ -54,4 +55,9 @@ class DepartmentService:
         """
         cursor = self.connection.cursor()
         cursor.execute(self.QUERY_UPDATE, (name, id))
+        self.connection.commit()
+
+    def delet_Department(self, id: int) -> None:
+        cursor = self.connection.cursor()
+        cursor.execute(self.QUERY_DELET, (id,))
         self.connection.commit()

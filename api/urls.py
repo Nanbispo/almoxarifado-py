@@ -1,8 +1,12 @@
-from django.urls import path
+from django.urls import path, re_path
 
 from api.views import department_detail, departments
 
 urlpatterns = [
     path("departments/", departments, name="departments"),
-    path("departments/<int:department_id>/", department_detail, name="department-detail"),
+    re_path(
+        r"^departments/(?P<department_id>[0-9]+)/?$",
+        department_detail,
+        name="department-detail",
+    ),
 ]
