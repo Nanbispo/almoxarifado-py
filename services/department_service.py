@@ -1,9 +1,11 @@
+from django.db.models.sql import AND
+
 from models.department import Department
 
 
 class DepartmentService:
     # Queries organizadas na ordem de uso/ações do banco de dados
-    QUERY_SELECT = "SELECT ID, NAME FROM DEPARTMENT"
+    QUERY_SELECT = "SELECT ID, NAME FROM DEPARTMENT WHERE D_E_L_E_T_ = '' or D_E_L_E_T_ IS NULL AND DATBLO IS NULL"
     QUERY_SELECT_BY_ID = "SELECT ID, NAME FROM DEPARTMENT WHERE ID = ?"
     QUERY_INSERT = "INSERT INTO DEPARTMENT (NAME) VALUES (?)"
     QUERY_UPDATE = "UPDATE DEPARTMENT SET NAME = ? WHERE ID = ?"
